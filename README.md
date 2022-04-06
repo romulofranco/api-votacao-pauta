@@ -1,44 +1,81 @@
-# API de Votação de Pautas
+# API Votacao Pauta Sample BackEnd
+This is an API  REST API Sample by using Spring Boot API to vote for some topics
 
-Esta API tem por finalidade permitir criar pautas, abrir uma sessão para votação com tempo determinado para encerramento e consequentemente permite realizar a votação de pautas por meio do CPF de cada votante.
+#### Prerequisites
+- [OpenJDK 8]
+- [Docker 19.03.12] (Optional)
+- [Maven 3.6+]
 
-## Documentação de API 
+#### Running
 
-- [Swagger Documentation API](https://sistema-votacao-de-pauta.herokuapp.com/swagger-ui.html#/pauta-controller)
-
-## Plataforma 
-
-- Java 8;
-- Spring Boot Framework;
-- Heroku Cloud;
-
-## Baixando e executando o projeto
-
-Com Java 8, Maven e Heroku CLI instalado, siga as instruções:[Heroku CLI](https://cli.heroku.com/).
-
-```sh
-$ git clone https://github.com/heroku/sistema-votacao-de-pauta.git
-$ cd sistema-votacao-de-pauta
-$ mvn install
-$ heroku local:start
-```
-
-Seu app heroku será executado localmente em [localhost:5000](http://localhost:5000/).
-
-Se deseja seguir com banco de dados, use `.env` arquivo de configuração:
+At prompt level, type commands below:
 
 ```
-JDBC_DATABASE_URL=jdbc:postgresql://localhost:5432/java_database_name
+git clone https://github.com/romulofranco/api-votacao-pauta.git
+cd api-votacao-pauta
 ```
 
-## Fazendo deploy no Heroku
+You can run the application by using maven directly or by using a Docker container
 
-```sh
-$ heroku create
-$ git push heroku main
-$ heroku open
+Maven:
+
+```
+mvn clean compile spring-boot:run
 ```
 
-## Postman collection test
+By using docker, first build an image
 
-Caminho: /postman/postman_collection_to_test_requests.json
+```
+docker build -t springio/api-votacao . 
+```
+
+Run an image that you've created
+
+```
+docker run -p 9090:8080 springio/api-votacao
+```
+
+### Get access to it
+
+In the both case (Maven or Docker), you should get access to app using:
+
+```
+http://localhost:9090/
+```
+
+### Demo
+
+A demo can be accessed in:
+
+```
+Heroku: https://https://api-votacao-startaideia.herokuapp.com/
+```
+
+#### Endpoints and API Doc
+
+The documentation should be accessible on:
+
+```
+http://localhost:9090/swagger-ui.html#/
+```
+
+### Other important settings
+In the  **application.yml** you shoud set some settings to provide an environment suitable for such case:
+1) Change default time for Vote Session
+2) Allow only voter with CPF ABLE_VOTE after request /v1/users/{valid cpf}
+3) Allow duplicity for name pauta with already exist
+```
+ votacao:
+  tempo:
+    sessao:
+      minutos: '30'
+  eleitor:
+    persistir:
+      permissao:
+        voto: true
+  pauta:
+    permitir:
+      duplicidade:
+        nome: true
+```
+
