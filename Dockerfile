@@ -10,4 +10,4 @@ WORKDIR /app
 EXPOSE 9090
 COPY --from=build /tmp/target/*.jar /app/api-votacao.jar
 
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app/ecommerce.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app/api-votacao.jar"]
