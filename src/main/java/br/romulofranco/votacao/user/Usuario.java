@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "usuario")
 public class Usuario implements Serializable {
 
 	public static final String ABLE_TO_VOTE = "ABLE_TO_VOTE";
