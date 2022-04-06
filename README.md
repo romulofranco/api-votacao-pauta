@@ -48,7 +48,7 @@ http://localhost:9090/
 A demo can be accessed in:
 
 ```
-Heroku: https://https://api-votacao-startaideia.herokuapp.com/
+Heroku: https://api-votacao-startaideia.herokuapp.com/
 ```
 
 #### Endpoints and API Doc
