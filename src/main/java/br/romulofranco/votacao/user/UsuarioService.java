@@ -18,10 +18,10 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UsuarioService {
 
-	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
-	private final UserRepository userRepository;
+	private static final Logger logger = LoggerFactory.getLogger(UsuarioService.class);
+	private final UsuarioRepository usuarioRepository;
 	@Value("${votacao.eleitor.persistir.permissao.voto}")
 	private boolean persistirPermissaoVoto;
 
@@ -29,16 +29,16 @@ public class UserService {
 	public StatusCPFResponse checaCPF(String cpf) {
 		try {
 			if (!Util.validaCPF(cpf))
-				return new StatusCPFResponse(User.UNABLE_TO_VOTE);
+				return new StatusCPFResponse(Usuario.UNABLE_TO_VOTE);
 
 			if (persistirPermissaoVoto) {
-				User eleitor = new User();
+				Usuario eleitor = new Usuario();
 				eleitor.setCpf(cpf);
 				eleitor.setEnabled(checkCPFEnabledToVote());
-				userRepository.save(eleitor);
+				usuarioRepository.save(eleitor);
 				return new StatusCPFResponse(eleitor.getStatus());
 			} else {
-				return new StatusCPFResponse(this.checkCPFEnabledToVote() ? User.ABLE_TO_VOTE : User.UNABLE_TO_VOTE);
+				return new StatusCPFResponse(this.checkCPFEnabledToVote() ? Usuario.ABLE_TO_VOTE : Usuario.UNABLE_TO_VOTE);
 			}
 		} catch (BusinessException be) {
 			logger.error(be.getMessage());
@@ -54,7 +54,7 @@ public class UserService {
 
 	public boolean checkUserEnabled(String cpf) {
 		try {
-			Optional<User> user = userRepository.findByCpf(cpf);
+			Optional<Usuario> user = usuarioRepository.findByCpf(cpf);
 			if (user.isPresent()) {
 				return user.get().isEnabled();
 			}

@@ -8,7 +8,7 @@ import br.romulofranco.votacao.pauta.Pauta;
 import br.romulofranco.votacao.pauta.PautaRepository;
 import br.romulofranco.votacao.sessao.Sessao;
 import br.romulofranco.votacao.sessao.SessaoRepository;
-import br.romulofranco.votacao.user.UserService;
+import br.romulofranco.votacao.user.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +34,7 @@ public class VotoService {
   private final PautaRepository pautaRepository;
   private final SessaoRepository sessaoRepository;
   private final VotoRepository votoRepository;
-  private final UserService userService;
+  private final UsuarioService usuarioService;
 
   public Optional<Pauta> getPauta(Integer id) {
     return pautaRepository.findById(id);
@@ -87,7 +87,7 @@ public class VotoService {
       }
 
       if (persistirPermissaoVoto) {
-        if (!userService.checkUserEnabled(voto.getCpfEleitor())) {
+        if (!usuarioService.checkUserEnabled(voto.getCpfEleitor())) {
           return new VotoStatusResponse(
               voto.getCpfEleitor(),
               MensagemVoto.ERRO,

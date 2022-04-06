@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.romulofranco.votacao.api.model.response.StatusCPFResponse;
-import br.romulofranco.votacao.user.User;
-import br.romulofranco.votacao.user.UserService;
+import br.romulofranco.votacao.user.Usuario;
+import br.romulofranco.votacao.user.UsuarioService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -20,14 +20,14 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-	private final UserService userService;
+	private final UsuarioService usuarioService;
 
 	@GetMapping("/{cpf}/")
 	public ResponseEntity checaCPF(@PathVariable("cpf") String cpf) {
 		logger.info("checaCPF");
-		StatusCPFResponse status = userService.checaCPF(cpf);
+		StatusCPFResponse status = usuarioService.checaCPF(cpf);
 		logger.info("Consultando CPF do Eleitor: {} - Status: {}", cpf, status.getStatus());
-		if (status.getStatus().equals(User.CPF_INVALID)) {
+		if (status.getStatus().equals(Usuario.CPF_INVALID)) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(status);
 		}
 		return ResponseEntity.ok(status);
