@@ -1,1 +1,1 @@
-web: java -jar target/api-votacao-pauta-1.0.jar -Dserver.port=7000
+web: java -jar target/api-votacao-pauta-1.0.jar -Dserver.port=$PORT
