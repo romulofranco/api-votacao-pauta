@@ -6,9 +6,6 @@ spring:
     initialSize: '10'
     removeAbandoned: false
     sql-script-encoding: UTF-8
-    hikari:
-      connection-timeout: '2000'
-      maximum-pool-size: '5'
     driverClassName: org.h2.Driver
     url: 'jdbc:h2:mem:votacaodb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE'
     username: sa
