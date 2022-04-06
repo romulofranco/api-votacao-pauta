@@ -10,7 +10,7 @@ spring:
       connection-timeout: '2000'
       maximum-pool-size: '5'
     driverClassName: org.h2.Driver
-    url: 'jdbc:h2:file:~/votacaodb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE'
+    url: 'jdbc:h2:file:/tmp/votacaodb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE'
     username: sa
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
