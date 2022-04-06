@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    sql-script-encoding: UTF-8
+    hikari:
+      connection-timeout: '30000'
+      maximum-pool-size: '5'
+    driverClassName: org.h2.Driver
+    url: 'jdbc:h2:mem:votacaodb'
+    username: sa
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        format_sql: true
+        temp:
+          use_jdbc_metadata_defaults: false
+  profiles:
+    active: test
+logging:
+  level:
+    org:
+      springframework: INFO
+votacao:
+  tempo:
+    sessao:
+      minutos: '5'
+  eleitor:
+    persistir:
+      permissao:
+        voto: true
+  pauta:
+    permitir:
+      duplicidade:
+        nome: true
